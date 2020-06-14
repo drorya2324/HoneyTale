@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/enemies/DamageArea.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/enemy.gd" type="Script" id=2]
+[ext_resource path="res://scenes/enemies/EnemiesAnimationTree.tres" type="AnimationNodeStateMachine" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 3.60539
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=2]
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -6.1601, -2.05336 )
+shape = SubResource( 1 )
+disabled = true
+
+[node name="DamageArea" parent="." instance=ExtResource( 1 )]
+collision_layer = 4
+collision_mask = 9
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = ExtResource( 3 )
+anim_player = NodePath("../DamageArea/AnimationPlayer")
+parameters/playback = SubResource( 2 )
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DeathTimer" type="Timer" parent="."]
+one_shot = true
+[connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]

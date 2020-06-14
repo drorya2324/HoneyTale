@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Camera2D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/level/PlatfrmTiles.tres" type="TileSet" id=3]
+[ext_resource path="res://scenes/enemies/FireBlob.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/enemies/Snake.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scripts/Game.gd" type="Script" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="Level1" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 98.433, 619.352 )
+
+[node name="Camera2D" parent="Player" instance=ExtResource( 2 )]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+format = 1
+tile_data = PoolIntArray( -196609, 2, 0, -131073, 2, 0, -65537, 2, 0, -1, 2, 0, 65535, 2, 0, 32, 2, 0, 131071, 2, 0, 65568, 2, 0, 196607, 2, 0, 131104, 2, 0, 262143, 2, 0, 196640, 2, 0, 327679, 2, 0, 262176, 2, 0, 393215, 2, 0, 327690, 0, 0, 327691, 0, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 327695, 0, 0, 327696, 0, 0, 327697, 0, 0, 327698, 0, 0, 327699, 0, 0, 327700, 0, 0, 327701, 0, 0, 327712, 2, 0, 458751, 2, 0, 393248, 2, 0, 524287, 2, 0, 458784, 2, 0, 589823, 2, 0, 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524309, 0, 0, 524310, 0, 0, 524311, 0, 0, 524312, 0, 0, 524313, 0, 0, 524314, 0, 0, 524320, 2, 0, 655359, 2, 0, 589856, 2, 0, 720895, 2, 0, 655372, 0, 0, 655392, 2, 0, 786431, 2, 0, 720928, 2, 0, 851967, 2, 0, 786441, 0, 0, 786442, 0, 0, 786443, 0, 0, 786444, 0, 0, 786445, 0, 0, 786464, 2, 0, 917503, 2, 0, 852000, 2, 0, 983039, 2, 0, 917536, 2, 0, 1048575, 2, 0, 983040, 0, 0, 983041, 0, 0, 983042, 0, 0, 983043, 0, 0, 983044, 0, 0, 983045, 0, 0, 983046, 0, 0, 983047, 0, 0, 983048, 0, 0, 983049, 0, 0, 983050, 0, 0, 983051, 0, 0, 983052, 0, 0, 983053, 0, 0, 983054, 0, 0, 983055, 0, 0, 983056, 0, 0, 983057, 0, 0, 983058, 0, 0, 983059, 0, 0, 983060, 0, 0, 983061, 0, 0, 983062, 0, 0, 983063, 0, 0, 983064, 0, 0, 983065, 0, 0, 983066, 0, 0, 983067, 0, 0, 983068, 0, 0, 983069, 0, 0, 983070, 0, 0, 983071, 0, 0, 983072, 2, 0 )
+
+[node name="SpawnArea" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="SpawnArea"]
+position = Vector2( 1024.1, 311.961 )
+scale = Vector2( 37.4, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea/Area2D"]
+shape = SubResource( 1 )
+disabled = true
+
+[node name="Enemies" type="Node2D" parent="."]
+position = Vector2( 1024.1, 311.961 )
+scale = Vector2( 37.4, 1 )
+
+[node name="Snakes" type="Node2D" parent="Enemies"]
+
+[node name="Snake" parent="Enemies/Snakes" instance=ExtResource( 5 )]
+position = Vector2( 0, -71.6494 )
+scale = Vector2( 0.1, 5 )
+
+[node name="FireBlobs" type="Node2D" parent="Enemies"]
+
+[node name="FireBlob2" parent="Enemies/FireBlobs" instance=ExtResource( 4 )]
+position = Vector2( 6.89182, -70.2042 )
+scale = Vector2( 0.1, 5 )
+
+[node name="SpawningTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+[connection signal="timeout" from="SpawningTimer" to="." method="_on_SpawningTimer_timeout"]
