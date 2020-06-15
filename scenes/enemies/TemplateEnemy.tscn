@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/enemies/EnemiesAnimationTree.tres" type="AnimationNodeStateMachine" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 3.60539
+radius = 6.39313
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=2]
 
@@ -22,7 +22,6 @@ disabled = true
 
 [node name="DamageArea" parent="." instance=ExtResource( 1 )]
 collision_layer = 4
-collision_mask = 9
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = ExtResource( 3 )
@@ -34,5 +33,9 @@ one_shot = true
 
 [node name="DeathTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="PatrolTimer" type="Timer" parent="."]
+autostart = true
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
+[connection signal="timeout" from="PatrolTimer" to="." method="_on_PatrolTimer_timeout"]

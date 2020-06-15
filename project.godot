@@ -41,7 +41,10 @@ skill={
 2d_physics/layer_1="player"
 2d_physics/layer_2="environment"
 2d_physics/layer_3="enemies"
-2d_physics/layer_4="weapon"
+2d_physics/layer_4="Platerweapon"
+2d_physics/layer_5="blockers"
+2d_physics/layer_6="ally"
+2d_physics/layer_7="Enemyweapon"
 
 [rendering]
 

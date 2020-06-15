@@ -1,19 +1,19 @@
 extends Node
 
-onready var spawn_num = get_node("SpawnArea").get_child_count()
+onready var spawn_areas_count = get_node("SpawnArea").get_child_count()
 
-func _ready():
-	spawn()
+#func _ready():
+#	spawn()
 
 
-func _on_SpawningTimer_timeout():
-	check_enemies_count()
+#func _on_SpawningTimer_timeout():
+#	check_enemies_count()
 	
 func spawn():
 	var snake = Global.Snake_scene.instance()
 	var fire_blob = Global.FireBlob_scene.instance()
 	randomize()
-	for child in spawn_num:
+	for child in spawn_areas_count:
 		var current_child = get_node("SpawnArea").get_child(child)
 		var max_x = int(current_child.scale.x)
 		var min_x = int(current_child.position.x - (max_x/2))
@@ -41,8 +41,9 @@ func spawn():
 
 
 func check_enemies_count():
-	if get_node("Enemies/FireBlobs").get_child_count() + get_node("Enemies/Snakes").get_child_count() < 10:
-		print("CHILDREN COUNT:",get_node("Enemies/FireBlobs").get_child_count() + get_node("Enemies/Snakes").get_child_count())
+	var enemies_count = get_node("Enemies/FireBlobs").get_child_count() + get_node("Enemies/Snakes").get_child_count()
+	if  enemies_count < 10:
+		print("CHILDREN COUNT:",enemies_count)
 		spawn()
 	else:
 		$SpawningTimer.start()

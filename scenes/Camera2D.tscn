@@ -4,7 +4,6 @@
 [ext_resource path="res://Assets/GFX/Backgrounds/backgroundForest.png" type="Texture" id=2]
 
 [node name="Camera2D" type="Camera2D"]
-current = true
 process_mode = 0
 
 [node name="ParallaxLayer" type="ParallaxBackground" parent="."]
@@ -24,9 +23,11 @@ __meta__ = {
 }
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxLayer"]
+visible = false
 motion_mirroring = Vector2( 1024, 0 )
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxLayer/ParallaxLayer2"]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 texture = ExtResource( 1 )

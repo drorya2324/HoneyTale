@@ -1,4 +1,6 @@
 extends Area2D
 
-func take_damage():
-	get_parent().hurt()
+
+ #Being called by Player.gd(_on_HitArea_area_entered(area))
+func take_damage(enemy):
+	get_parent().hurt(enemy)

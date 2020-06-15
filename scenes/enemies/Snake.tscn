@@ -1,27 +1,46 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/GFX/enemies/Cobra Sprite Sheet.png" type="Texture" id=1]
 [ext_resource path="res://scenes/enemies/TemplateEnemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/Snake.gd" type="Script" id=3]
 [ext_resource path="res://scenes/enemies/Animations/SnakeAnimations.tscn" type="PackedScene" id=4]
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 7.36255, 7.79367 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 4.71603, 2.07477 )
+
 [sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
-[node name="Snake" instance=ExtResource( 2 )]
+[node name="Snake" groups=[
+"enemies",
+] instance=ExtResource( 2 )]
 scale = Vector2( 5, 5 )
 collision_layer = 4
-collision_mask = 11
+collision_mask = 26
 script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 1 )
 vframes = 5
 hframes = 8
-frame = 2
+frame = 11
+
+[node name="HitArea" type="Area2D" parent="Sprite" index="0"]
+collision_layer = 64
+
+[node name="HitAreaCollision" type="CollisionShape2D" parent="Sprite/HitArea" index="0"]
+position = Vector2( 7.42431, 8.26253 )
+shape = SubResource( 3 )
+disabled = true
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2( -1.04065, 11.2492 )
+visible = true
+position = Vector2( -5.30416, 13.1604 )
 scale = Vector2( 1.32791, 1 )
+shape = SubResource( 2 )
+disabled = false
 
 [node name="DamageArea" parent="." index="2"]
 position = Vector2( -3.09716, 9.82577 )
@@ -33,3 +52,4 @@ scale = Vector2( 0.56, 0.352 )
 anim_player = NodePath("../DamageArea/SnakeAnimations")
 active = true
 parameters/playback = SubResource( 1 )
+[connection signal="area_entered" from="Sprite/HitArea" to="." method="_on_HitArea_area_entered"]

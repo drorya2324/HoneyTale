@@ -1,4 +1,6 @@
 extends KinematicBody2D
+
+
 const SPEED = 500
 const JUMP_SPEED= -1200
 const GRAVITY = 3600
@@ -13,13 +15,16 @@ var Double_Jump = false
 
 export var world_limit= 3000
 export var damage = 10
+export var lives = 50
 
 var state_machine
 var fighting = false
 
+
 func _ready():
 	Global.Player = self
 	state_machine = $AnimationTree.get("parameters/playback")
+	$Sprite/HitArea/CollisionShape.disabled = true
 
 
 func _physics_process(delta):
@@ -89,10 +94,9 @@ func jump():
 
 
 func fall(delta):	
-	#limiting the fall speed and allowing bunny
-	# to boost properly on the JumpPads:
+	#limiting the fall speed
 	motion.y = clamp(motion.y, (JUMP_BOOST), -JUMP_SPEED)
-	if is_on_floor() and not flinch and not boosted:
+	if is_on_floor():
 		motion.y=0
 	elif is_on_ceiling() :
 		motion.y=+ 1
@@ -103,12 +107,18 @@ func fall(delta):
 
 
 #Being called by GameState
-func hurt():
-	$AnimatedSprite/Timer.start()
+func hurt(enemy):
+	#$AnimatedSprite/Timer.start()
 	state_machine.travel("hurt")
 	flinch = true
 	#Global.Pain_SFX.play()
 	motion.y = JUMP_SPEED
+	if enemy == Global.Snake:
+		lives -= Global.Snake.damage
+	else:
+		lives-= Global.FireBlob.damage
+	print("PL", lives)
+	
 func die():
 	set_physics_process(false)
 	
@@ -122,6 +132,6 @@ func _on_Timer_timeout():
 
 func _on_HitArea_area_entered(area):
 	if area.is_in_group("hitable"):
-		area.take_damage()
+		area.take_damage(self)
 	else:
 		print("ng",area)

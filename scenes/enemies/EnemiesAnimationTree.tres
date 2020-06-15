@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=13 format=2]
+[gd_resource type="AnimationNodeStateMachine" load_steps=15 format=2]
 
 [sub_resource type="AnimationNodeAnimation" id=1]
 animation = "attack"
@@ -15,15 +15,9 @@ animation = "idle"
 [sub_resource type="AnimationNodeAnimation" id=5]
 animation = "run"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=6]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=7]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=8]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=9]
-switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=10]
 
@@ -33,18 +27,28 @@ auto_advance = true
 switch_mode = 2
 auto_advance = true
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+
 [resource]
 states/attack/node = SubResource( 1 )
-states/attack/position = Vector2( 176, 187 )
+states/attack/position = Vector2( 339, 287 )
 states/die/node = SubResource( 2 )
-states/die/position = Vector2( 498, 187 )
+states/die/position = Vector2( 532, 187 )
 states/hurt/node = SubResource( 3 )
-states/hurt/position = Vector2( 345, 281 )
+states/hurt/position = Vector2( 121, 270 )
 states/idle/node = SubResource( 4 )
-states/idle/position = Vector2( 340, 187 )
+states/idle/position = Vector2( 108, 125 )
 states/run/node = SubResource( 5 )
-states/run/position = Vector2( 345, 92 )
-transitions = [ "idle", "die", SubResource( 6 ), "run", "idle", SubResource( 7 ), "idle", "run", SubResource( 8 ), "attack", "idle", SubResource( 9 ), "idle", "attack", SubResource( 10 ), "idle", "hurt", SubResource( 11 ), "hurt", "idle", SubResource( 12 ) ]
+states/run/position = Vector2( 350, 119 )
+transitions = [ "run", "idle", SubResource( 7 ), "idle", "run", SubResource( 8 ), "idle", "attack", SubResource( 10 ), "idle", "hurt", SubResource( 11 ), "hurt", "run", SubResource( 12 ), "hurt", "die", SubResource( 13 ), "attack", "run", SubResource( 14 ), "run", "hurt", SubResource( 15 ), "run", "attack", SubResource( 16 ) ]
 start_node = "idle"
 end_node = "die"
-graph_offset = Vector2( 0, 74.3456 )
+graph_offset = Vector2( 0, 54.5762 )
