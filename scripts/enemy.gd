@@ -10,6 +10,8 @@ var speed
 var motion = Vector2()
 var damage
 var hitarea_position
+var items
+var id
 
 
 ###
@@ -27,8 +29,9 @@ func _ready():
 
 func _process(delta):
 	if state == 0:
+		pass
 	#look_at(Global.Player.position)
-		state_machine.travel("idle")
+	#	state_machine.travel("idle")
 	elif state ==1:
 		face_target()
 		chase()
@@ -73,9 +76,11 @@ func face_target():
 #	print(hitarea_position)
 	if self.global_position>target.global_position:
 		$Sprite.flip_h = true
+		$DamageArea.position.x = 3
 	#	$HitArea.position.x = -hitarea_position
 	else:
 		$Sprite.flip_h = false
+		$DamageArea.position.x = -3
 	#	$HitArea.position.x = hitarea_position
 
 
@@ -112,6 +117,7 @@ func die():
 	$DeathTimer.start()
 	$DamageArea/CollisionShape2D.disabled = true
 	state_machine.travel("die")
+	item_drop()
 
 
 func _on_DeathTimer_timeout():
@@ -131,8 +137,13 @@ func _on_PatrolTimer_timeout():
 			motion.x =0
 			state_machine.travel("idle")
 			$Sprite.flip_h = !$Sprite.flip_h
+			$DamageArea.position.x = -$DamageArea.position.x
+			
 	else:
 		$PatrolTimer.stop()
 
-
-
+func item_drop():
+	var rnd = RandomNumberGenerator.new()
+	var chances = rnd.randi_range(0,0)
+	if chances == 0:
+		Global.Game.show_item(self.global_position,self.id)

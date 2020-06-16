@@ -24,7 +24,6 @@ var fighting = false
 func _ready():
 	Global.Player = self
 	state_machine = $AnimationTree.get("parameters/playback")
-	$Sprite/HitArea/CollisionShape.disabled = true
 
 
 func _physics_process(delta):
@@ -70,11 +69,13 @@ func flip(booli):
 		$Sprite.set_flip_h(true)
 		$Sprite/HitArea.position.x = -8
 		$CollisionShape2D.position.x= 9
+		$DamageArea.position.x = $CollisionShape2D.position.x
 		state_machine.travel("run")
 	else:
 		$Sprite.set_flip_h(false)
 		$Sprite/HitArea.position.x = 8
 		$CollisionShape2D.position.x= -9
+		$DamageArea.position.x = $CollisionShape2D.position.x
 		state_machine.travel("run")
 	fighting = false
 
@@ -112,15 +113,19 @@ func hurt(enemy):
 	state_machine.travel("hurt")
 	flinch = true
 	#Global.Pain_SFX.play()
-	motion.y = JUMP_SPEED
+	motion.x = SPEED
 	if enemy == Global.Snake:
 		lives -= Global.Snake.damage
 	else:
 		lives-= Global.FireBlob.damage
-	print("PL", lives)
+	#print("PL", lives)
+	if lives <= 0 :
+		die()
 	
 func die():
+	$DamageArea/CollisionShape2D.disabled = true
 	set_physics_process(false)
+	state_machine.travel("die")
 	
 #func when timer ends:
 	#hurt = false
@@ -133,5 +138,3 @@ func _on_Timer_timeout():
 func _on_HitArea_area_entered(area):
 	if area.is_in_group("hitable"):
 		area.take_damage(self)
-	else:
-		print("ng",area)

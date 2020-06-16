@@ -5,7 +5,6 @@ var state_machine
 
 func _ready():
 	state_machine = get("parameters/playback")
-	print(state_machine)
 	Global.PlayerAnimations = self
 	
 #Being called by Player (update_motion())
