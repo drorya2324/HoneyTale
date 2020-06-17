@@ -4,10 +4,11 @@ extends "res://scripts/enemy.gd"
 func _ready():
 	id = "fb"
 	Global.FireBlob = self
-	damage = 10
+	damage = Global.Fireblob_damage
 	lives = 50
 	speed = 50
 	hitarea_position = 8.5
+	exp_points = 10
 
 
 func _process(delta):

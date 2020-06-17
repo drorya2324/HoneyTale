@@ -4,10 +4,11 @@ extends "res://scripts/enemy.gd"
 func _ready():
 	id = "s"
 	Global.Snake = self
-	damage = 5
+	damage = Global.Snake_damage
 	lives = 30
 	speed = 70
 	hitarea_position = 10.8
+	exp_points = 5
 #	items = 
 
 

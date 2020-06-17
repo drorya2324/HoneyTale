@@ -20,6 +20,7 @@ func animate(posi):
 
 func _on_Coin_body_entered(body):
 	if body.collision_layer == 1 and collectable:
+		Global.Player.coins_up(1)
 		queue_free()
 		#animate "magnet"
 		#queue_free()

@@ -24,4 +24,5 @@ func _on_CollectableTimer_timeout():
 
 func _on_Potion_body_entered(body):
 	if body.collision_layer == 1 and collectable:
+		Global.Player.potion_up()
 		queue_free()

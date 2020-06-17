@@ -1,19 +1,21 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://scenes/enemies/DamageArea.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=2]
 [ext_resource path="res://scripts/PlayerAnimations.gd" type="Script" id=3]
 [ext_resource path="res://Assets/GFX/Player/Adventurer Female Sprite Sheet.png" type="Texture" id=4]
+[ext_resource path="res://Assets/GFX/interface/Fonts/ArialCE.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Assets/GFX/Backgrounds/backgroundColorForest.png" type="Texture" id=6]
+[ext_resource path="res://Assets/GFX/interface/Fonts/ArialCEBold.ttf" type="DynamicFontData" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 20.0035
 height = 21.008
 
-[sub_resource type="RectangleShape2D" id=32]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 5.41397, 9.46321 )
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -52,7 +54,7 @@ tracks/2/keys = {
 "values": [ Vector2( 5.41397, 9.46321 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -91,7 +93,7 @@ tracks/2/keys = {
 "values": [ Vector2( 6.95076, 6.08227 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -106,7 +108,7 @@ tracks/0/keys = {
 "values": [ 36, 37, 38, 39, 40, 41, 42 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -121,7 +123,7 @@ tracks/0/keys = {
 "values": [ 27, 28, 29, 30 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -136,7 +138,7 @@ tracks/0/keys = {
 "values": [ 0, 1 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -150,7 +152,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -166,38 +168,36 @@ tracks/0/keys = {
 "values": [ 16, 15, 14, 13, 12, 11, 10, 9 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "attack1"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "attack2"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=12]
 animation = "die"
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "hurt"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=14]
 animation = "idle"
 
-[sub_resource type="AnimationNodeAnimation" id=14]
+[sub_resource type="AnimationNodeAnimation" id=15]
 animation = "jump"
 
-[sub_resource type="AnimationNodeAnimation" id=15]
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "run"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
 switch_mode = 2
 auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=17]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=18]
-switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=19]
+switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=20]
 
@@ -208,42 +208,177 @@ auto_advance = true
 [sub_resource type="AnimationNodeStateMachineTransition" id=23]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=24]
-switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=25]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=26]
 switch_mode = 2
 auto_advance = true
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=27]
+switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=28]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=29]
 
-[sub_resource type="AnimationNodeStateMachine" id=30]
-states/attack1/node = SubResource( 9 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+
+[sub_resource type="AnimationNodeStateMachine" id=31]
+states/attack1/node = SubResource( 10 )
 states/attack1/position = Vector2( 133, 43 )
-states/attack2/node = SubResource( 10 )
+states/attack2/node = SubResource( 11 )
 states/attack2/position = Vector2( 223, 210 )
-states/die/node = SubResource( 11 )
+states/die/node = SubResource( 12 )
 states/die/position = Vector2( 778, 20 )
-states/hurt/node = SubResource( 12 )
+states/hurt/node = SubResource( 13 )
 states/hurt/position = Vector2( 859, 219 )
-states/idle/node = SubResource( 13 )
+states/idle/node = SubResource( 14 )
 states/idle/position = Vector2( 481, 154 )
-states/jump/node = SubResource( 14 )
+states/jump/node = SubResource( 15 )
 states/jump/position = Vector2( 516, 330 )
-states/run/node = SubResource( 15 )
+states/run/node = SubResource( 16 )
 states/run/position = Vector2( 486, -21 )
-transitions = [ "attack2", "idle", SubResource( 16 ), "idle", "attack2", SubResource( 17 ), "attack1", "idle", SubResource( 18 ), "idle", "attack1", SubResource( 19 ), "run", "idle", SubResource( 20 ), "idle", "run", SubResource( 21 ), "idle", "die", SubResource( 22 ), "idle", "hurt", SubResource( 23 ), "hurt", "idle", SubResource( 24 ), "idle", "jump", SubResource( 25 ), "jump", "idle", SubResource( 26 ), "run", "attack2", SubResource( 27 ), "run", "attack1", SubResource( 28 ), "jump", "attack2", SubResource( 29 ) ]
+transitions = [ "attack2", "idle", SubResource( 17 ), "idle", "attack2", SubResource( 18 ), "attack1", "idle", SubResource( 19 ), "idle", "attack1", SubResource( 20 ), "run", "idle", SubResource( 21 ), "idle", "run", SubResource( 22 ), "idle", "die", SubResource( 23 ), "idle", "hurt", SubResource( 24 ), "hurt", "idle", SubResource( 25 ), "idle", "jump", SubResource( 26 ), "jump", "idle", SubResource( 27 ), "run", "attack2", SubResource( 28 ), "run", "attack1", SubResource( 29 ), "jump", "attack2", SubResource( 30 ) ]
 start_node = "idle"
 end_node = "die"
 graph_offset = Vector2( 79.7131, -11.8035 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=31]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=32]
+
+[sub_resource type="DynamicFont" id=33]
+size = 30
+outline_size = 3
+outline_color = Color( 0.0901961, 0.109804, 0.882353, 1 )
+extra_spacing_char = 2
+extra_spacing_space = 4
+font_data = ExtResource( 5 )
+
+[sub_resource type="Animation" id=34]
+resource_name = "fade"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.0862745 ) ]
+}
+
+[sub_resource type="Animation" id=35]
+resource_name = "show"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.5, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.152941 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.152941 ) ]
+}
+
+[sub_resource type="DynamicFont" id=36]
+size = 35
+outline_size = 4
+outline_color = Color( 0.0941176, 0.905882, 0.431373, 1 )
+extra_spacing_char = 2
+extra_spacing_space = 4
+font_data = ExtResource( 5 )
+
+[sub_resource type="Animation" id=37]
+resource_name = "fade"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=38]
+resource_name = "show"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.5, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.113725 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.113725 ) ]
+}
+
+[sub_resource type="DynamicFont" id=39]
+size = 35
+outline_size = 4
+outline_color = Color( 0.0509804, 0.0117647, 0.0117647, 1 )
+extra_spacing_char = 4
+font_data = ExtResource( 7 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 2
@@ -267,7 +402,7 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/HitArea"]
 position = Vector2( 0.0835218, 0.114923 )
-shape = SubResource( 32 )
+shape = SubResource( 2 )
 disabled = true
 
 [node name="DamageArea" parent="." instance=ExtResource( 1 )]
@@ -276,19 +411,19 @@ scale = Vector2( 1, 1.56 )
 collision_mask = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/attack1 = SubResource( 2 )
-anims/attack2 = SubResource( 3 )
-anims/die = SubResource( 4 )
-anims/hurt = SubResource( 5 )
-anims/idle = SubResource( 6 )
-anims/jump = SubResource( 7 )
-anims/run = SubResource( 8 )
+anims/attack1 = SubResource( 3 )
+anims/attack2 = SubResource( 4 )
+anims/die = SubResource( 5 )
+anims/hurt = SubResource( 6 )
+anims/idle = SubResource( 7 )
+anims/jump = SubResource( 8 )
+anims/run = SubResource( 9 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 30 )
+tree_root = SubResource( 31 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 31 )
+parameters/playback = SubResource( 32 )
 script = ExtResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -305,4 +440,90 @@ motion_mirroring = Vector2( 1024, 0 )
 z_index = -1
 z_as_relative = false
 texture = ExtResource( 6 )
+
+[node name="PopUps" type="CanvasLayer" parent="."]
+
+[node name="QuestComplete_Popup" type="Control" parent="PopUps"]
+visible = false
+modulate = Color( 1, 1, 1, 0.152941 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -512.0
+margin_right = 512.0
+rect_min_size = Vector2( 200, 100 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="PopUps/QuestComplete_Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="QC_Label" type="Label" parent="PopUps/QuestComplete_Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 33 )
+text = "Quest Complete!"
+
+[node name="QC_Animation" type="AnimationPlayer" parent="PopUps/QuestComplete_Popup"]
+anims/fade = SubResource( 34 )
+anims/show = SubResource( 35 )
+
+[node name="LevelUp_Popup" type="Control" parent="PopUps"]
+visible = false
+modulate = Color( 1, 1, 1, 0.113725 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -512.0
+margin_right = 512.0
+rect_min_size = Vector2( 200, 100 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="PopUps/LevelUp_Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="LU_Label" type="Label" parent="PopUps/LevelUp_Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.85004
+margin_top = 1.89999
+margin_right = 2.85004
+margin_bottom = 1.89999
+custom_fonts/font = SubResource( 36 )
+text = "Level Up!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LU_Animation" type="AnimationPlayer" parent="PopUps/LevelUp_Popup"]
+anims/fade = SubResource( 37 )
+anims/show = SubResource( 38 )
+
+[node name="QuestProgress_Popup" type="Control" parent="PopUps"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -512.0
+margin_right = 512.0
+rect_min_size = Vector2( 200, 200 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="PopUps/QuestProgress_Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuestProgress_Label" type="Label" parent="PopUps/QuestProgress_Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 39 )
+text = "Quest progress:
+3 snails to go"
 [connection signal="area_entered" from="Sprite/HitArea" to="." method="_on_HitArea_area_entered"]

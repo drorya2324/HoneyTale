@@ -18,6 +18,7 @@ func animate(posi):
 
 func _on_Area2D_body_entered(body):
 	if body.collision_layer == 1 and collectable:
+		Global.Player.purplegem_up()
 		queue_free()
 		#animate "magnet"
 		#queue_free()

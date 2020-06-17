@@ -12,6 +12,7 @@ var damage
 var hitarea_position
 var items
 var id
+var exp_points
 
 
 ###
@@ -115,12 +116,13 @@ func _on_AttackTimer_timeout():
 		
 func die():
 	$DeathTimer.start()
+	item_drop()
 	$DamageArea/CollisionShape2D.disabled = true
 	state_machine.travel("die")
-	item_drop()
 
 
 func _on_DeathTimer_timeout():
+	Global.Player.exp_up(exp_points)
 	queue_free()
 
 
@@ -143,7 +145,9 @@ func _on_PatrolTimer_timeout():
 		$PatrolTimer.stop()
 
 func item_drop():
-	var rnd = RandomNumberGenerator.new()
-	var chances = rnd.randi_range(0,0)
-	if chances == 0:
-		Global.Game.show_item(self.global_position,self.id)
+	if $DamageArea/CollisionShape2D.disabled == false:
+		var rnd = RandomNumberGenerator.new()
+		var chances = rnd.randi_range(0,0)
+		#print (chances)
+		if chances == 0:
+			Global.Game.show_item(self.global_position,self.id)
