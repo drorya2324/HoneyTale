@@ -39,10 +39,5 @@ frame = 173
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
 anims/idle = SubResource( 2 )
-
-[node name="CollectableTimer" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
-autostart = true
 [connection signal="body_entered" from="." to="." method="_on_Potion_body_entered"]
-[connection signal="timeout" from="CollectableTimer" to="." method="_on_CollectableTimer_timeout"]
+[connection signal="body_exited" from="." to="." method="_on_Potion_body_exited"]

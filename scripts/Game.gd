@@ -1,4 +1,11 @@
 extends Node
+# KEYS:
+# move: <left arrow>, <right arrow>
+# jump: <up arrow>
+# attack: <Z>
+# skill: <X>
+# collect items: <C>
+
 
 onready var spawn_areas_count = get_node("SpawnArea").get_child_count()
 var rnd = RandomNumberGenerator.new()
@@ -6,6 +13,7 @@ var enemies_count
 
 
 func _ready():
+	Music.volume_db -= 5
 	Global.Game = self
 	spawn()
 #	show_items()

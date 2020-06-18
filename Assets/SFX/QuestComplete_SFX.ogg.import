@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/QuestComplete_SFX.ogg-b04696680945af3b6901f17817cde578.oggstr"
+
+[deps]
+
+source_file="res://Assets/SFX/QuestComplete_SFX.ogg"
+dest_files=[ "res://.import/QuestComplete_SFX.ogg-b04696680945af3b6901f17817cde578.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

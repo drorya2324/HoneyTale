@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+var max_hp
 var lives
 var distance_to_target
 var state_machine
@@ -13,6 +14,7 @@ var hitarea_position
 var items
 var id
 var exp_points
+var can_die = true
 
 
 ###
@@ -24,8 +26,10 @@ const JUMP_BOOST = 1.7*JUMP_SPEED
 
 
 func _ready():
+	$TextureProgress.hide()
 	distance_to_target = (self.global_position.x -  target.global_position.x )
 	state_machine= $AnimationTree.get("parameters/playback")
+	$Damage/DamageLabel.text = ""
 
 
 func _process(delta):
@@ -60,6 +64,10 @@ func fall(delta):
 func hurt(enemy):
 	state_machine.travel("hurt")
 	lives -= Global.Player.damage
+	$Damage/DamageLabel.text = str("-",Global.Player.damage)
+	$Damage/DamageLabel_Animation.play("show")
+	$TextureProgress.show()
+	self.get_node("Hurt_SFX").play()
 	#if state == 0:
 	update_state()
 
@@ -71,6 +79,7 @@ func update_state():
 		die()
 	else:
 		state = 1
+		$TextureProgress.value = lives
 
 
 func face_target():
@@ -115,10 +124,15 @@ func _on_AttackTimer_timeout():
 
 		
 func die():
-	$DeathTimer.start()
-	item_drop()
-	$DamageArea/CollisionShape2D.disabled = true
-	state_machine.travel("die")
+	if can_die:
+		set_physics_process(false)
+		can_die = false
+		$DeathTimer.start()
+		$TextureProgress.value = lives
+		item_drop()
+		$DamageArea/CollisionShape2D.disabled = true
+		self.get_node("Die_SFX").play()
+		state_machine.travel("die")
 
 
 func _on_DeathTimer_timeout():

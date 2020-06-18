@@ -1,12 +1,15 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://scenes/enemies/DamageArea.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=2]
 [ext_resource path="res://scripts/PlayerAnimations.gd" type="Script" id=3]
 [ext_resource path="res://Assets/GFX/Player/Adventurer Female Sprite Sheet.png" type="Texture" id=4]
-[ext_resource path="res://Assets/GFX/interface/Fonts/ArialCE.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Assets/SFX/LevelUp_SFX.ogg" type="AudioStream" id=5]
 [ext_resource path="res://Assets/GFX/Backgrounds/backgroundColorForest.png" type="Texture" id=6]
-[ext_resource path="res://Assets/GFX/interface/Fonts/ArialCEBold.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://Assets/SFX/Collect_SFX.wav" type="AudioStream" id=7]
+[ext_resource path="res://Assets/SFX/QuestComplete_SFX.ogg" type="AudioStream" id=8]
+[ext_resource path="res://Assets/SFX/Revive_SFX.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Assets/SFX/PlayerDeath-SFX.ogg" type="AudioStream" id=10]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 20.0035
@@ -247,142 +250,10 @@ graph_offset = Vector2( 79.7131, -11.8035 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=32]
 
-[sub_resource type="DynamicFont" id=33]
-size = 30
-outline_size = 3
-outline_color = Color( 0.0901961, 0.109804, 0.882353, 1 )
-extra_spacing_char = 2
-extra_spacing_space = 4
-font_data = ExtResource( 5 )
-
-[sub_resource type="Animation" id=34]
-resource_name = "fade"
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.7 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.0862745 ) ]
-}
-
-[sub_resource type="Animation" id=35]
-resource_name = "show"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.5, 1.5, 2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0.152941 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.152941 ) ]
-}
-
-[sub_resource type="DynamicFont" id=36]
-size = 35
-outline_size = 4
-outline_color = Color( 0.0941176, 0.905882, 0.431373, 1 )
-extra_spacing_char = 2
-extra_spacing_space = 4
-font_data = ExtResource( 5 )
-
-[sub_resource type="Animation" id=37]
-resource_name = "fade"
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.9 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.8 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-
-[sub_resource type="Animation" id=38]
-resource_name = "show"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.5, 1.5, 2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0.113725 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.113725 ) ]
-}
-
-[sub_resource type="DynamicFont" id=39]
-size = 35
-outline_size = 4
-outline_color = Color( 0.0509804, 0.0117647, 0.0117647, 1 )
-extra_spacing_char = 4
-font_data = ExtResource( 7 )
-
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 2
 script = ExtResource( 2 )
+max_hp = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -9, 15.126 )
@@ -430,6 +301,8 @@ script = ExtResource( 3 )
 current = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+offset = Vector2( 500, 0 )
+transform = Transform2D( 1, 0, 0, 1, 500, 0 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 z_index = -2
@@ -441,89 +314,30 @@ z_index = -1
 z_as_relative = false
 texture = ExtResource( 6 )
 
-[node name="PopUps" type="CanvasLayer" parent="."]
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
 
-[node name="QuestComplete_Popup" type="Control" parent="PopUps"]
-visible = false
-modulate = Color( 1, 1, 1, 0.152941 )
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -512.0
-margin_right = 512.0
-rect_min_size = Vector2( 200, 100 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="SFX" type="Node2D" parent="."]
 
-[node name="NinePatchRect" type="NinePatchRect" parent="PopUps/QuestComplete_Popup"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Item_SFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 7 )
+volume_db = 17.0
 
-[node name="QC_Label" type="Label" parent="PopUps/QuestComplete_Popup"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = SubResource( 33 )
-text = "Quest Complete!"
+[node name="QuestComplete_SFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 8 )
+volume_db = 20.0
 
-[node name="QC_Animation" type="AnimationPlayer" parent="PopUps/QuestComplete_Popup"]
-anims/fade = SubResource( 34 )
-anims/show = SubResource( 35 )
+[node name="LevelUp_SFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 5 )
+volume_db = 15.0
 
-[node name="LevelUp_Popup" type="Control" parent="PopUps"]
-visible = false
-modulate = Color( 1, 1, 1, 0.113725 )
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -512.0
-margin_right = 512.0
-rect_min_size = Vector2( 200, 100 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Die_SFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 10 )
+volume_db = 5.0
 
-[node name="NinePatchRect" type="NinePatchRect" parent="PopUps/LevelUp_Popup"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="LU_Label" type="Label" parent="PopUps/LevelUp_Popup"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 2.85004
-margin_top = 1.89999
-margin_right = 2.85004
-margin_bottom = 1.89999
-custom_fonts/font = SubResource( 36 )
-text = "Level Up!"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LU_Animation" type="AnimationPlayer" parent="PopUps/LevelUp_Popup"]
-anims/fade = SubResource( 37 )
-anims/show = SubResource( 38 )
-
-[node name="QuestProgress_Popup" type="Control" parent="PopUps"]
-visible = false
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -512.0
-margin_right = 512.0
-rect_min_size = Vector2( 200, 200 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NinePatchRect" type="NinePatchRect" parent="PopUps/QuestProgress_Popup"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="QuestProgress_Label" type="Label" parent="PopUps/QuestProgress_Popup"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = SubResource( 39 )
-text = "Quest progress:
-3 snails to go"
+[node name="Revive_SFX" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 9 )
+volume_db = 6.0
 [connection signal="area_entered" from="Sprite/HitArea" to="." method="_on_HitArea_area_entered"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]

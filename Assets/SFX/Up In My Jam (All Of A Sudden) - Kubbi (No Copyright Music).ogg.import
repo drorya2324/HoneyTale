@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Up In My Jam (All Of A Sudden) - Kubbi (No Copyright Music).ogg-e70650a4809baa381d402f5892fdb5b2.oggstr"
+
+[deps]
+
+source_file="res://Assets/SFX/Up In My Jam (All Of A Sudden) - Kubbi (No Copyright Music).ogg"
+dest_files=[ "res://.import/Up In My Jam (All Of A Sudden) - Kubbi (No Copyright Music).ogg-e70650a4809baa381d402f5892fdb5b2.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/GFX/enemies/Cobra Sprite Sheet.png" type="Texture" id=1]
 [ext_resource path="res://scenes/enemies/TemplateEnemy.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://scenes/enemies/Animations/snake/hurt.tres" type="Animation" id=6]
 [ext_resource path="res://scenes/enemies/Animations/snake/idle.tres" type="Animation" id=7]
 [ext_resource path="res://scenes/enemies/Animations/snake/run.tres" type="Animation" id=8]
+[ext_resource path="res://Assets/SFX/SnakeHurt_SFX.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Assets/SFX/SnakeDeath_SFX.wav" type="AudioStream" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.36255, 7.79367 )
@@ -29,7 +31,7 @@ script = ExtResource( 3 )
 texture = ExtResource( 1 )
 vframes = 5
 hframes = 8
-frame = 1
+frame = 6
 
 [node name="HitArea" type="Area2D" parent="Sprite" index="0"]
 position = Vector2( 9, 9 )
@@ -62,4 +64,19 @@ anims/run = ExtResource( 8 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 3 )
+
+[node name="TextureProgress" parent="." index="8"]
+margin_left = -8.45393
+margin_top = 0.274128
+margin_right = 239.546
+margin_bottom = 40.2741
+rect_min_size = Vector2( 40, 10 )
+
+[node name="Hurt_SFX" type="AudioStreamPlayer" parent="." index="10"]
+stream = ExtResource( 9 )
+volume_db = 15.0
+
+[node name="Die_SFX" type="AudioStreamPlayer" parent="." index="11"]
+stream = ExtResource( 10 )
+volume_db = 15.0
 [connection signal="area_entered" from="Sprite/HitArea" to="." method="_on_HitArea_area_entered"]

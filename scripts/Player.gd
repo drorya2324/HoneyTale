@@ -15,9 +15,11 @@ var Double_Jump = false
 
 export var world_limit= 3000
 export var damage = 10
-export var lives = 1000
+export var max_hp = 1000
+var lives
 export var level = 1
-export var exp_points = 0
+var exp_points = 0
+export var max_exp = 250
 
 var state_machine
 var fighting = false
@@ -29,15 +31,18 @@ var coins_count = 0
 var next_quest = false
 var quest2 = false
 
+var can_die = true
+
 
 func _ready():
 	Global.Player = self
+	lives = max_hp
 	state_machine = $AnimationTree.get("parameters/playback")
 
 func _process(delta):
 	if next_quest == true:
 		next_quest()
-	if exp_points >= 100:
+	if exp_points >= max_exp:
 		level_up()
 
 func _physics_process(delta):
@@ -124,23 +129,28 @@ func fall(delta):
 
 #Being called by GameState
 func hurt(enemy):
+	if can_die:
 	#$AnimatedSprite/Timer.start()
-	state_machine.travel("hurt")
+		state_machine.travel("hurt")
 #	flinch = true
 	#Global.Pain_SFX.play()
-	motion.x = SPEED
-	if enemy == Global.Snake:
-		lives -= Global.Snake_damage
-	else:
-		lives-= Global.Fireblob_damage
+		motion.x = SPEED
+		if enemy == Global.Snake:
+			lives -= Global.Snake_damage
+		else:
+			lives-= Global.Fireblob_damage
 	#print("PL", lives)
-	if lives <= 0 :
-		die()
+		if lives <= 0 :
+			die()
 	
 func die():
-	$DamageArea/CollisionShape2D.disabled = true
-	set_physics_process(false)
-	state_machine.travel("die")
+	if can_die:
+		can_die = false
+		$DeathTimer.start()
+		$SFX/Die_SFX.play()
+		set_physics_process(false)
+		$DamageArea/CollisionShape2D.disabled = true
+		state_machine.travel("die")
 	
 #func when timer ends:
 	#hurt = false
@@ -156,45 +166,71 @@ func _on_HitArea_area_entered(area):
 
 func purplegem_up():
 	purplegem_count += 1
+	get_parent().find_node("PurpleGems").set_item_text(0,str(purplegem_count))
+	$SFX/Item_SFX.play()
 #	print("gems count= ", purplegem_count)
 func potion_up():
 	potion_count += 1
+	get_parent().find_node("FBBlood").set_item_text(0,str(potion_count))
+	$SFX/Item_SFX.play()
 #	print("potion count= ", potion_count)
 func coins_up(amount):
 	coins_count += amount
+	$SFX/Item_SFX.play()
 #	print("coins count= ", coins_count)
 func exp_up(amount):
 	exp_points += amount
-	print("exp points= ", exp_points)
+#	print("exp points= ", exp_points)
 
 # Being called by NPC1.gd ( _input(event) )
 func next_quest():
 	if Global.quest ==1 :
-		$PopUps/QuestProgress_Popup/QuestProgress_Label.text = str( "Quest Progress: " ,  (10 - potion_count ), " <FireBlob's blood> to go." )
-		$PopUps/QuestProgress_Popup.show()
+		get_parent().find_node("QuestProgress_Label").text = str( "Quest Progress: \n" ,  (10 - potion_count ), " <FireBlob's blood> \n to go." )
+		get_parent().find_node("QuestProgress_Popup").show()
 		if potion_count >= 10:
 	#		print("@@@QUEST 1 COMPLETE!@@@")
-			$PopUps/QuestProgress_Popup.hide()
-			$PopUps/QuestComplete_Popup/QC_Animation.play("show")
+			get_parent().find_node("QuestProgress_Popup").hide()
+			get_parent().find_node("QC_Animation").play("show")
 			next_quest =false
+			$SFX/QuestComplete_SFX.play()
 			Global.NPC1.quest_complete()
 	elif Global.quest == 2:
-		$PopUps/QuestProgress_Popup/QuestProgress_Label.text = str( "Quest Progress: " ,  (10 - purplegem_count ), " <Purple Gems> to go." )
-		$PopUps/QuestProgress_Popup.show()
+		get_parent().find_node("QuestProgress_Label").text = str( "Quest Progress: \n",  (10 - purplegem_count ), " <Purple Gems> \n to go." )
+		get_parent().find_node("QuestProgress_Popup").show()
 		if purplegem_count >= 10:
 	#		print("@@@QUEST 2 COMPLETE!@@@")
-			$PopUps/QuestProgress_Popup.hide()
-			$PopUps/QuestComplete_Popup/QC_Animation.play("show")
+			get_parent().find_node("QuestProgress_Popup").hide()
+			get_parent().find_node("QC_Animation").play("show")
 			next_quest = false
+			$SFX/QuestComplete_SFX.play()
 			Global.NPC1.quest_complete()
 		
 
 
 func level_up():
-	$PopUps/LevelUp_Popup/LU_Animation.play("show")
+	get_parent().find_node("LU_Animation").play("show")
 	damage += 10
 	level += 1
 	print("level up! " , level)
+#	get_parent().find_node("Level_Label").text = str("Level: ", level)
 	print("damage = ", damage)
-	exp_points -= 100
+	exp_points -= max_exp
+	max_exp = max_exp + (max_exp/10)
+	$SFX/LevelUp_SFX.play()
+	Global.GUI.update_GUI()
 
+
+
+func _on_DeathTimer_timeout():
+	lives = max_hp
+	self.position.x = 300
+	self.position.y = 700
+	$SFX/Revive_SFX.play()
+	$DamageArea/CollisionShape2D.disabled = false
+	set_physics_process(true)
+	state_machine.travel("idle")
+	level = 1
+	damage = 10
+	exp_points = 0
+	Global.GUI.update_GUI()
+	can_die = true

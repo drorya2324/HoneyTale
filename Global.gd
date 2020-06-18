@@ -1,8 +1,5 @@
 extends Node
 var GameState
-var Game
-var Player
-var GUI
 var PlayerAnimations
 var JumpPad
 var Jump_SFX
@@ -11,9 +8,12 @@ var Pain_SFX
 var LifeUp_SFX
 var JumpPad_SFX
 
+var Game
+var Player
 var Snake
 var FireBlob
 var NPC1
+var GUI
 
 var quest = 1
 var reward = 0

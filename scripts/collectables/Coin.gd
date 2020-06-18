@@ -19,7 +19,13 @@ func animate(posi):
 
 
 func _on_Coin_body_entered(body):
-	if body.collision_layer == 1 and collectable:
+	if body.collision_layer == 1:
+		collectable = true
+		#animate "magnet"
+		#queue_free()
+
+func _input(event):
+	if Input.is_action_just_pressed("collect_items") and collectable:
 		Global.Player.coins_up(1)
 		queue_free()
 		#animate "magnet"
@@ -27,5 +33,7 @@ func _on_Coin_body_entered(body):
 
 
 
-func _on_CollectableTimer_timeout():
-	collectable= true
+
+func _on_Coin_body_exited(body):
+	if body.collision_layer == 1:
+		collectable = false

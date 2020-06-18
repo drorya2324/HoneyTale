@@ -10,6 +10,7 @@ var quest
 var reward
 var quest_complete = false
 var reward_complete = false
+var dialoged = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -49,6 +50,7 @@ func _on_ClickArea_body_entered(body):
 
 func _input(event):
 	if can_dialog and Input.is_action_just_pressed("ui_accept"):
+		dialoged = true
 		if reward_complete or Global.quest == 1:
 			update_quest_text()
 		#	Global.Player.next_quest()
@@ -76,6 +78,7 @@ func update_quest_text():
 func quest_complete():
 	if Global.reward <2:
 		Global.reward += 1
+		$Reward_SFX.play()
 	#	print("reward = " , Global.reward)
 		quest_complete = true
 
@@ -84,10 +87,12 @@ func _on_ClickArea_body_exited(body):
 	# $dialog/popup.hide()
 	if body.collision_layer == 1:
 	#	print("body exited")
-		$Dialog/Popup.hide()
-		if reward_complete or Global.quest == 1:
-			Global.Player.next_quest = true
-			reward_complete = false
+		if dialoged:
+			$Dialog/Popup.hide()
+			if reward_complete or Global.quest == 1:
+				Global.Player.next_quest = true
+				reward_complete = false
+			dialoged = false
 
 		#if Global.quest == 1:
 		#	Global.Player.quest1 = true

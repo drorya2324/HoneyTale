@@ -2,9 +2,12 @@ extends "res://scripts/enemy.gd"
 
 
 func _ready():
+	$TextureProgress.rect_position.x = self.position.x
+	$TextureProgress.rect_position.y = self.position.y + 65
 	id = "s"
 	Global.Snake = self
 	damage = Global.Snake_damage
+	max_hp = 30
 	lives = 30
 	speed = 70
 	hitarea_position = 10.8

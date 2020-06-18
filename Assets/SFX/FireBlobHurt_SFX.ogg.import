@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/FireBlobHurt_SFX.ogg-70d800df4fa26c6e9db821d5b999e41c.oggstr"
+
+[deps]
+
+source_file="res://Assets/SFX/FireBlobHurt_SFX.ogg"
+dest_files=[ "res://.import/FireBlobHurt_SFX.ogg-70d800df4fa26c6e9db821d5b999e41c.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

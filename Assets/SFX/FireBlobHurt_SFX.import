@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SnakeDeath_SFX.ogg-d759686ec42b95c6aa5eb5b4ca054fcb.oggstr"
+
+[deps]
+
+source_file="res://Assets/SFX/SnakeDeath_SFX.ogg"
+dest_files=[ "res://.import/SnakeDeath_SFX.ogg-d759686ec42b95c6aa5eb5b4ca054fcb.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

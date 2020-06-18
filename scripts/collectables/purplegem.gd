@@ -17,12 +17,17 @@ func animate(posi):
 #	inst.animate()
 
 func _on_Area2D_body_entered(body):
-	if body.collision_layer == 1 and collectable:
-		Global.Player.purplegem_up()
-		queue_free()
+	if body.collision_layer == 1:
+		collectable = true
 		#animate "magnet"
 		#queue_free()
 
+func _input(event):
+	if Input.is_action_just_pressed("collect_items") and collectable:
+		Global.Player.purplegem_up()
+		queue_free()
+		
 
-func _on_CollectableTimer_timeout():
-	collectable = true
+func _on_PurpleGem_body_exited(body):
+	if body.collision_layer == 1:
+		collectable = false

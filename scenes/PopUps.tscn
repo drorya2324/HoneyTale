@@ -1,0 +1,232 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Assets/GFX/interface/Fonts/ArialCE.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/GFX/interface/Fonts/ArialCEBold.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+outline_size = 3
+outline_color = Color( 0.0901961, 0.109804, 0.882353, 1 )
+extra_spacing_char = 2
+extra_spacing_space = 4
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "fade"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.0862745 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "show"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.5, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.152941 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.152941 ) ]
+}
+
+[sub_resource type="DynamicFont" id=4]
+size = 35
+outline_size = 4
+outline_color = Color( 0.0941176, 0.905882, 0.431373, 1 )
+extra_spacing_char = 2
+extra_spacing_space = 4
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "fade"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "show"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.5, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.113725 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.113725 ) ]
+}
+
+[sub_resource type="DynamicFont" id=7]
+size = 35
+outline_size = 4
+outline_color = Color( 0.0509804, 0.0117647, 0.0117647, 1 )
+extra_spacing_char = 4
+font_data = ExtResource( 2 )
+
+[node name="PopUps" type="CanvasLayer"]
+
+[node name="QuestComplete_Popup" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0.152941 )
+anchor_left = 0.5
+anchor_top = 0.2
+anchor_right = 0.5
+anchor_bottom = 0.2
+margin_left = -140.0
+margin_right = 140.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 280, 50 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="QuestComplete_Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="QC_Label" type="Label" parent="QuestComplete_Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 1 )
+text = "Quest Complete!"
+
+[node name="QC_Animation" type="AnimationPlayer" parent="QuestComplete_Popup"]
+anims/fade = SubResource( 2 )
+anims/show = SubResource( 3 )
+
+[node name="LevelUp_Popup" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0.113725 )
+anchor_left = 0.5
+anchor_top = 0.2
+anchor_right = 0.5
+anchor_bottom = 0.23
+margin_left = -140.0
+margin_right = 140.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 280, 50 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="LevelUp_Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="LU_Label" type="Label" parent="LevelUp_Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.85004
+margin_top = 1.89999
+margin_right = 2.85004
+margin_bottom = 1.89999
+custom_fonts/font = SubResource( 4 )
+text = "Level Up!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LU_Animation" type="AnimationPlayer" parent="LevelUp_Popup"]
+anims/fade = SubResource( 5 )
+anims/show = SubResource( 6 )
+
+[node name="QuestProgress_Popup" type="Control" parent="."]
+anchor_left = 0.977
+anchor_top = 0.034
+anchor_right = 0.977
+anchor_bottom = 0.034
+margin_left = -500.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 350, 100 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="QuestProgress_Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuestProgress_Label" type="Label" parent="QuestProgress_Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 7 )
+text = "Quest progress:
+3 snails to go"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
