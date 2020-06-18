@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/SFX/Up In My Jam (All Of A Sudden) - Kubbi (No Copyright Music).ogg" type="AudioStream" id=1]
+
+[node name="Music" type="AudioStreamPlayer"]
+stream = ExtResource( 1 )
+autoplay = true

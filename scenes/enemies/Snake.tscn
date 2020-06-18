@@ -1,0 +1,82 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Assets/GFX/enemies/Cobra Sprite Sheet.png" type="Texture" id=1]
+[ext_resource path="res://scenes/enemies/TemplateEnemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/Snake.gd" type="Script" id=3]
+[ext_resource path="res://scenes/enemies/Animations/snake/attack.tres" type="Animation" id=4]
+[ext_resource path="res://scenes/enemies/Animations/snake/die.tres" type="Animation" id=5]
+[ext_resource path="res://scenes/enemies/Animations/snake/hurt.tres" type="Animation" id=6]
+[ext_resource path="res://scenes/enemies/Animations/snake/idle.tres" type="Animation" id=7]
+[ext_resource path="res://scenes/enemies/Animations/snake/run.tres" type="Animation" id=8]
+[ext_resource path="res://Assets/SFX/SnakeHurt_SFX.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Assets/SFX/SnakeDeath_SFX.wav" type="AudioStream" id=10]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.36255, 7.79367 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1.8472, 2.07477 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=3]
+
+[node name="Snake" groups=[
+"enemies",
+] instance=ExtResource( 2 )]
+scale = Vector2( 5, 5 )
+collision_layer = 4
+collision_mask = 26
+script = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 6
+
+[node name="HitArea" type="Area2D" parent="Sprite" index="0"]
+position = Vector2( 9, 9 )
+collision_layer = 64
+
+[node name="HitAreaCollision" type="CollisionShape2D" parent="Sprite/HitArea" index="0"]
+position = Vector2( -0.119741, -2.86102e-06 )
+shape = SubResource( 1 )
+disabled = true
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = true
+position = Vector2( 0, 13.16 )
+scale = Vector2( 1.32791, 1 )
+shape = SubResource( 2 )
+disabled = false
+
+[node name="DamageArea" parent="." index="2"]
+position = Vector2( -3, 9.826 )
+scale = Vector2( 0.56, 0.352 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+anims/attack = ExtResource( 4 )
+anims/die = ExtResource( 5 )
+anims/hurt = ExtResource( 6 )
+anims/idle = ExtResource( 7 )
+anims/run = ExtResource( 8 )
+
+[node name="AnimationTree" parent="." index="4"]
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 3 )
+
+[node name="TextureProgress" parent="." index="8"]
+margin_left = -8.45393
+margin_top = 0.274128
+margin_right = 239.546
+margin_bottom = 40.2741
+rect_min_size = Vector2( 40, 10 )
+
+[node name="Hurt_SFX" type="AudioStreamPlayer" parent="." index="10"]
+stream = ExtResource( 9 )
+volume_db = 15.0
+
+[node name="Die_SFX" type="AudioStreamPlayer" parent="." index="11"]
+stream = ExtResource( 10 )
+volume_db = 15.0
+[connection signal="area_entered" from="Sprite/HitArea" to="." method="_on_HitArea_area_entered"]

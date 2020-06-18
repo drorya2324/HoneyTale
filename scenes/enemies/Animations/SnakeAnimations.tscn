@@ -1,0 +1,14 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/enemies/Animations/snake/attack.tres" type="Animation" id=1]
+[ext_resource path="res://scenes/enemies/Animations/snake/die.tres" type="Animation" id=2]
+[ext_resource path="res://scenes/enemies/Animations/snake/hurt.tres" type="Animation" id=3]
+[ext_resource path="res://scenes/enemies/Animations/snake/idle.tres" type="Animation" id=4]
+[ext_resource path="res://scenes/enemies/Animations/snake/run.tres" type="Animation" id=5]
+
+[node name="SnakeAnimations" type="AnimationPlayer"]
+anims/attack = ExtResource( 1 )
+anims/die = ExtResource( 2 )
+anims/hurt = ExtResource( 3 )
+anims/idle = ExtResource( 4 )
+anims/run = ExtResource( 5 )

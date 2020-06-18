@@ -1,0 +1,54 @@
+[gd_resource type="AnimationNodeStateMachine" load_steps=15 format=2]
+
+[sub_resource type="AnimationNodeAnimation" id=1]
+animation = "attack"
+
+[sub_resource type="AnimationNodeAnimation" id=2]
+animation = "die"
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "hurt"
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=6]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=7]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=8]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+
+[resource]
+states/attack/node = SubResource( 1 )
+states/attack/position = Vector2( 339, 287 )
+states/die/node = SubResource( 2 )
+states/die/position = Vector2( 532, 187 )
+states/hurt/node = SubResource( 3 )
+states/hurt/position = Vector2( 121, 270 )
+states/idle/node = SubResource( 4 )
+states/idle/position = Vector2( 108, 125 )
+states/run/node = SubResource( 5 )
+states/run/position = Vector2( 350, 119 )
+transitions = [ "run", "idle", SubResource( 6 ), "idle", "run", SubResource( 7 ), "idle", "attack", SubResource( 8 ), "idle", "hurt", SubResource( 9 ), "hurt", "run", SubResource( 10 ), "hurt", "die", SubResource( 11 ), "attack", "run", SubResource( 12 ), "run", "hurt", SubResource( 13 ), "run", "attack", SubResource( 14 ) ]
+start_node = "idle"
+end_node = "die"
+graph_offset = Vector2( 0, 54.5762 )

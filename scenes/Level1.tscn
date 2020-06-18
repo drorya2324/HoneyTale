@@ -1,0 +1,259 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Camera2D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/level/PlatfrmTiles.tres" type="TileSet" id=3]
+[ext_resource path="res://scenes/enemies/FireBlob.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/enemies/Snake.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scripts/Game.gd" type="Script" id=6]
+[ext_resource path="res://scenes/Blocker.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/allies/NPC1.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/GFX/interface/Fonts/new_dynamicfont.tres" type="DynamicFont" id=9]
+[ext_resource path="res://Assets/GFX/interface/lives bars/player_full2.png" type="Texture" id=10]
+[ext_resource path="res://Assets/GFX/interface/lives bars/EXP_empty.png" type="Texture" id=11]
+[ext_resource path="res://Assets/GFX/interface/lives bars/EXP_full.png" type="Texture" id=12]
+[ext_resource path="res://Assets/GFX/interface/lives bars/player_empty2.png" type="Texture" id=13]
+[ext_resource path="res://Assets/GFX/interface/Fonts/GUIfont.tres" type="Theme" id=14]
+[ext_resource path="res://scripts/GUI.gd" type="Script" id=15]
+[ext_resource path="res://scenes/PopUps.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Assets/GFX/items/fireblob/blood.png" type="Texture" id=17]
+[ext_resource path="res://Assets/GFX/items/snake/purple gem.jpg" type="Texture" id=18]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="Level1" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 299.559, 699.802 )
+z_index = 1
+max_hp = 1000
+max_exp = 200
+
+[node name="Camera2D" parent="Player" instance=ExtResource( 2 )]
+
+[node name="TileMap" type="TileMap" parent="."]
+z_index = -1
+tile_set = ExtResource( 3 )
+collision_layer = 2
+collision_mask = 5
+format = 1
+tile_data = PoolIntArray( -655361, 2, 0, -720896, 2, 0, -720895, 2, 0, -720894, 2, 0, -720893, 2, 0, -720892, 2, 0, -720891, 2, 0, -720890, 2, 0, -720889, 2, 0, -720888, 2, 0, -720887, 2, 0, -720886, 2, 0, -720885, 2, 0, -720884, 2, 0, -720883, 2, 0, -720882, 2, 0, -720881, 2, 0, -720880, 2, 0, -720879, 2, 0, -720878, 2, 0, -720877, 2, 0, -720876, 2, 0, -720875, 2, 0, -720874, 2, 0, -720873, 2, 0, -720872, 2, 0, -720871, 2, 0, -720870, 2, 0, -720869, 2, 0, -720868, 2, 0, -720867, 2, 0, -720866, 2, 0, -720865, 2, 0, -720864, 2, 0, -589825, 2, 0, -655328, 2, 0, -524289, 2, 0, -589792, 2, 0, -458753, 2, 0, -524256, 2, 0, -393217, 2, 0, -458720, 2, 0, -327681, 2, 0, -393184, 2, 0, -262145, 2, 0, -327648, 2, 0, -196609, 2, 0, -262112, 2, 0, -131073, 2, 0, -196576, 2, 0, -65537, 2, 0, -131040, 2, 0, -1, 2, 0, -65504, 2, 0, 65535, 2, 0, 32, 2, 0, 131071, 2, 0, 65568, 2, 0, 196607, 2, 0, 131104, 2, 0, 262143, 2, 0, 196640, 2, 0, 327679, 2, 0, 262176, 2, 0, 393215, 2, 0, 327690, 0, 0, 327691, 0, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 327695, 0, 0, 327696, 0, 0, 327697, 0, 0, 327698, 0, 0, 327699, 0, 0, 327700, 0, 0, 327701, 0, 0, 327712, 2, 0, 458751, 2, 0, 393248, 2, 0, 524287, 2, 0, 458784, 2, 0, 589823, 2, 0, 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524309, 0, 0, 524310, 0, 0, 524311, 0, 0, 524312, 0, 0, 524313, 0, 0, 524314, 0, 0, 524320, 2, 0, 655359, 2, 0, 589856, 2, 0, 720895, 2, 0, 655372, 0, 0, 655392, 2, 0, 786431, 2, 0, 720928, 2, 0, 851967, 2, 0, 786441, 0, 0, 786442, 0, 0, 786443, 0, 0, 786444, 0, 0, 786445, 0, 0, 786464, 2, 0, 917503, 2, 0, 852000, 2, 0, 983039, 2, 0, 917536, 2, 0, 1048575, 2, 0, 983040, 0, 0, 983041, 0, 0, 983042, 0, 0, 983043, 0, 0, 983044, 0, 0, 983045, 0, 0, 983046, 0, 0, 983047, 0, 0, 983048, 0, 0, 983049, 0, 0, 983050, 0, 0, 983051, 0, 0, 983052, 0, 0, 983053, 0, 0, 983054, 0, 0, 983055, 0, 0, 983056, 0, 0, 983057, 0, 0, 983058, 0, 0, 983059, 0, 0, 983060, 0, 0, 983061, 0, 0, 983062, 0, 0, 983063, 0, 0, 983064, 0, 0, 983065, 0, 0, 983066, 0, 0, 983067, 0, 0, 983068, 0, 0, 983069, 0, 0, 983070, 0, 0, 983071, 0, 0, 983072, 2, 0 )
+
+[node name="SpawnArea" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="SpawnArea"]
+position = Vector2( 1024.1, 311.961 )
+scale = Vector2( 37.4, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea/Area2D"]
+shape = SubResource( 1 )
+disabled = true
+
+[node name="Enemies" type="Node2D" parent="."]
+position = Vector2( 1024.1, 311.961 )
+scale = Vector2( 37.4, 1 )
+
+[node name="Snakes" type="Node2D" parent="Enemies"]
+
+[node name="Snake" parent="Enemies/Snakes" instance=ExtResource( 5 )]
+position = Vector2( -3.37286, -69.8804 )
+scale = Vector2( 0.1, 5 )
+
+[node name="Snake2" parent="Enemies/Snakes" instance=ExtResource( 5 )]
+position = Vector2( 7.85951, -80.9842 )
+scale = Vector2( 0.1, 5 )
+
+[node name="Snake3" parent="Enemies/Snakes" instance=ExtResource( 5 )]
+position = Vector2( 0.239304, -71.7311 )
+scale = Vector2( 0.1, 5 )
+
+[node name="Snake4" parent="Enemies/Snakes" instance=ExtResource( 5 )]
+position = Vector2( -5.35214, -69.8804 )
+scale = Vector2( 0.1, 5 )
+
+[node name="FireBlobs" type="Node2D" parent="Enemies"]
+
+[node name="FireBlob2" parent="Enemies/FireBlobs" instance=ExtResource( 4 )]
+position = Vector2( 6.89182, -70.2042 )
+scale = Vector2( 0.1, 5 )
+
+[node name="FireBlob3" parent="Enemies/FireBlobs" instance=ExtResource( 4 )]
+position = Vector2( -2.26233, -77.6067 )
+scale = Vector2( 0.1, 5 )
+
+[node name="FireBlob4" parent="Enemies/FireBlobs" instance=ExtResource( 4 )]
+position = Vector2( 1.44882, -75.7561 )
+scale = Vector2( 0.1, 5 )
+
+[node name="FireBlob5" parent="Enemies/FireBlobs" instance=ExtResource( 4 )]
+position = Vector2( -7.45792, -75.7561 )
+scale = Vector2( 0.1, 5 )
+
+[node name="SpawningTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="Blockers" type="Node2D" parent="."]
+
+[node name="StaticBody2D" parent="Blockers" instance=ExtResource( 7 )]
+position = Vector2( 634.095, 289.995 )
+
+[node name="StaticBody2D2" parent="Blockers" instance=ExtResource( 7 )]
+position = Vector2( 1414.7, 288.325 )
+
+[node name="Allies" type="Node2D" parent="."]
+
+[node name="NPC1" parent="Allies" instance=ExtResource( 8 )]
+position = Vector2( 1595.47, 359.972 )
+collision_layer = 32
+
+[node name="Collectables" type="Node2D" parent="."]
+
+[node name="GUI" type="Node2D" parent="."]
+script = ExtResource( 15 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="GUI"]
+
+[node name="PlayerProgress" type="NinePatchRect" parent="GUI/CanvasLayer"]
+anchor_left = 0.014
+anchor_top = 0.021
+anchor_right = 0.014
+anchor_bottom = 0.021
+margin_right = 1024.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 400, 105 )
+theme = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/CanvasLayer/PlayerProgress"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level_Label" type="Label" parent="GUI/CanvasLayer/PlayerProgress/VBoxContainer"]
+margin_right = 259.0
+margin_bottom = 29.0
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0.0352941, 0.129412, 0.898039, 1 )
+custom_colors/font_outline_modulate = Color( 0.0941176, 0.764706, 0.898039, 1 )
+text = "level: 1"
+
+[node name="EXP_Container" type="HBoxContainer" parent="GUI/CanvasLayer/PlayerProgress/VBoxContainer"]
+margin_top = 33.0
+margin_right = 259.0
+margin_bottom = 82.0
+
+[node name="EXP_Label" type="Label" parent="GUI/CanvasLayer/PlayerProgress/VBoxContainer/EXP_Container"]
+margin_top = 10.0
+margin_right = 65.0
+margin_bottom = 39.0
+theme = ExtResource( 14 )
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0.188235, 0.447059, 0.72549, 1 )
+custom_colors/font_outline_modulate = Color( 0.0588235, 0.0901961, 0.921569, 1 )
+text = "EXP  "
+
+[node name="EXP_Progress" type="TextureProgress" parent="GUI/CanvasLayer/PlayerProgress/VBoxContainer/EXP_Container"]
+margin_left = 69.0
+margin_right = 259.0
+margin_bottom = 49.0
+value = 60.0
+allow_greater = true
+texture_under = ExtResource( 11 )
+texture_progress = ExtResource( 12 )
+
+[node name="HP_Container2" type="HBoxContainer" parent="GUI/CanvasLayer/PlayerProgress/VBoxContainer"]
+margin_top = 86.0
+margin_right = 259.0
+margin_bottom = 135.0
+
+[node name="HP_Label" type="Label" parent="GUI/CanvasLayer/PlayerProgress/VBoxContainer/HP_Container2"]
+margin_top = 10.0
+margin_right = 64.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 0.427451, 0.862745, 0.376471, 1 )
+custom_colors/font_outline_modulate = Color( 0.282353, 0.690196, 0.101961, 1 )
+text = "Lives"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HP_Progress" type="TextureProgress" parent="GUI/CanvasLayer/PlayerProgress/VBoxContainer/HP_Container2"]
+margin_left = 68.0
+margin_right = 258.0
+margin_bottom = 49.0
+value = 20.0
+texture_under = ExtResource( 13 )
+texture_progress = ExtResource( 10 )
+
+[node name="Items" type="NinePatchRect" parent="GUI/CanvasLayer"]
+anchor_left = 0.979
+anchor_top = 0.025
+anchor_right = 0.979
+anchor_bottom = 0.025
+margin_left = -90.0001
+margin_bottom = 121.8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/CanvasLayer/Items"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -140.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 60, 120 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PurpleGems" type="ItemList" parent="GUI/CanvasLayer/Items/VBoxContainer"]
+margin_right = 90.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 90, 56 )
+items = [ "0", ExtResource( 18 ), false ]
+auto_height = true
+icon_scale = 0.05
+
+[node name="FBBlood" type="ItemList" parent="GUI/CanvasLayer/Items/VBoxContainer"]
+margin_top = 60.0
+margin_right = 90.0
+margin_bottom = 116.0
+rect_min_size = Vector2( 90, 56 )
+items = [ "0", ExtResource( 17 ), false ]
+auto_height = true
+icon_scale = 2.3
+
+[node name="Popups" type="Node2D" parent="."]
+
+[node name="PopUps" parent="Popups" instance=ExtResource( 16 )]
+
+[node name="QuestComplete_Popup" parent="Popups/PopUps" index="0"]
+visible = false
+anchor_left = 0.6
+anchor_right = 0.6
+
+[node name="LevelUp_Popup" parent="Popups/PopUps" index="1"]
+visible = false
+anchor_left = 0.6
+anchor_right = 0.6
+
+[node name="QuestProgress_Popup" parent="Popups/PopUps" index="2"]
+visible = false
+anchor_left = 0.632
+anchor_top = 0.029
+anchor_right = 0.632
+anchor_bottom = 0.036
+margin_left = -250.0
+margin_right = 250.0
+[connection signal="timeout" from="SpawningTimer" to="." method="_on_SpawningTimer_timeout"]
+
+[editable path="Allies/NPC1"]
+
+[editable path="Popups/PopUps"]

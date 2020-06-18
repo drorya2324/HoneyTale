@@ -1,0 +1,109 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/enemies/DamageArea.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/enemy.gd" type="Script" id=2]
+[ext_resource path="res://scenes/enemies/EnemiesAnimationTree.tres" type="AnimationNodeStateMachine" id=3]
+[ext_resource path="res://Assets/GFX/interface/lives bars/enemy_empy.png" type="Texture" id=4]
+[ext_resource path="res://Assets/GFX/interface/lives bars/enemy_full.png" type="Texture" id=5]
+[ext_resource path="res://Assets/GFX/interface/Fonts/SourceSansPro-Black.otf" type="DynamicFontData" id=6]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 6.39313
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=2]
+
+[sub_resource type="DynamicFont" id=3]
+size = 6
+use_filter = true
+font_data = ExtResource( 6 )
+
+[sub_resource type="Animation" id=4]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("DamageLabel:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -10 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DamageLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -6.1601, -2.05336 )
+shape = SubResource( 1 )
+disabled = true
+
+[node name="DamageArea" parent="." instance=ExtResource( 1 )]
+collision_layer = 4
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = ExtResource( 3 )
+anim_player = NodePath("../DamageArea/AnimationPlayer")
+parameters/playback = SubResource( 2 )
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+
+[node name="PatrolTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -5.9314
+margin_top = -26.6938
+margin_right = 242.069
+margin_bottom = 13.3062
+rect_scale = Vector2( 0.05, 0.05 )
+value = 80.0
+texture_under = ExtResource( 4 )
+texture_progress = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Damage" type="Node2D" parent="."]
+
+[node name="DamageLabel" type="Label" parent="Damage"]
+margin_right = 8.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 5, 5 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.870588, 0.0901961, 0.0901961, 1 )
+text = "-10"
+align = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DamageLabel_Animation" type="AnimationPlayer" parent="Damage"]
+anims/show = SubResource( 4 )
+[connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
+[connection signal="timeout" from="PatrolTimer" to="." method="_on_PatrolTimer_timeout"]
